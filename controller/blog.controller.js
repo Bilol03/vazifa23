@@ -35,15 +35,22 @@ let  updatePost = async (req, res, next) => {
         let id = req.params.id
         let result = await blogSchema.findByIdAndUpdate(id, req.body)
         
-        if(!res) return res.status(404).json({message: "Post not found"})
+        if(!result) return res.status(404).json({message: "Post not found"})
         
         res.status(201).json({ message: "Success", data: await blogSchema.findById(id).exec()})
     } catch (error) {
         next(error)
     }
 }
-let  deletePost = (req, res) => {
-
+let  deletePost = async(req, res, next) => {
+    try {
+        let id = req.params.id
+        let data = await blogSchema.findByIdAndDelete(id)
+    
+        res.status(200).send( { message: "OK", data: data} )
+    } catch (error) {
+        next(error)
+    }
 }
 
 export default {
