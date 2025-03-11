@@ -21,7 +21,7 @@ route
     .get('/posts', blogController.getPosts)
     .get('/posts/:id', blogController.getPostById)
     .post('/posts', upload.single("file"), blogController.postPost)
-    .put('/posts', blogController.updatePost)
-    .delete('/posts', blogController.deletePost)
+    .put('/posts/:id', blogController.updatePost)
+    .delete('/posts/:id', blogController.deletePost)
 
 export default route
