@@ -1,8 +1,12 @@
-import fs from 'fs'
 import blogSchema from '../modules/blog.module.js'
 
-let  getPosts = (req, res) => {
-
+let  getPosts = async(req, res) => {
+    try {
+        let blogs = await blogSchema.find()
+        res.send(blogs)
+    } catch (error) {
+        next(error)
+    }
 }
 let  getPostById = (req, res) => {
 
