@@ -5,8 +5,10 @@ let getUsers = async (req, res, next) => {
     let blogs = await userSchema.find()
     res.send(blogs)
 }
-let getUserById = (req, res, next) => {
-
+let getUserById = async(req, res, next) => {
+    let data = await userSchema.findById(req.params.id).exec()
+    if (!data) return res.status(404).json({ message: "User not found" })
+    res.status(200).json({message: "Success", data})  
 }
 let postUser = (req, res, next) => {
 
