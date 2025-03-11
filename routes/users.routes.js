@@ -7,7 +7,7 @@ route
     .get('/users', userController.getUsers)
     .get('/users/:id', userController.getUserById)
     .post('/users', userController.postUser)
-    .put('/users', userController.updateUser)
-    .delete('/users', userController.deleteUser)
+    .put('/users/:id', userController.updateUser)
+    .delete('/users/:id', userController.deleteUser)
 
 export default route
