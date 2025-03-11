@@ -1,6 +1,6 @@
 import blogSchema from '../modules/blog.module.js'
 
-let  getPosts = async(req, res) => {
+let  getPosts = async(req, res, next) => {
     try {
         let blogs = await blogSchema.find()
         res.send(blogs)
@@ -8,7 +8,7 @@ let  getPosts = async(req, res) => {
         next(error)
     }
 }
-let  getPostById = async (req, res) => {
+let  getPostById = async (req, res, next) => {
     try {
         let data = await blogSchema.findById(req.params.id).exec()
         if (!data) return res.status(404).json({ message: "User not found" })
@@ -17,8 +17,17 @@ let  getPostById = async (req, res) => {
         next(err)
     }
 }
-let  postPost = (req, res) => {
-    const body = req.body.body
+let  postPost = async(req, res, next) => {
+    try {
+        const body = JSON.parse(req.body.body)
+        body.image = "/uploads/"+ req.file.filename
+        console.log(req.file);
+        
+        let post = await blogSchema.create(body)
+        res.status(201).json({message: "Succes", data: post})
+    } catch (error) {
+        next(error)
+    }
     // blogSchema.create()
 
 }
