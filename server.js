@@ -5,4 +5,4 @@ config()
 
 connectDB()
 
-app.listen(process.env.PORT, () => console.log("This server is running on http://localhost" + process.env.PORT))
+app.listen(process.env.PORT, () => console.log("This server is running on http://localhost:" + process.env.PORT))
