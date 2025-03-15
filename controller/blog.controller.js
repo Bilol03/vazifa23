@@ -2,7 +2,7 @@ import blogSchema from '../modules/blog.module.js'
 
 let  getPosts = async(req, res, next) => {
     try {
-        let blogs = await blogSchema.find()
+        let blogs = await blogSchema.find().populate("author")
         res.send(blogs)
     } catch (error) {
         next(error)
